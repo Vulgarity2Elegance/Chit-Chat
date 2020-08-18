@@ -1,0 +1,35 @@
+{
+  "name": "infected",
+  "version": "1.0.0",
+  "description": "A COVID game app where a user will be prompted to select a city from a dropdown.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint **/*.js --quiet",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vulgarity2Elegance/INFECTED.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vulgarity2Elegance/INFECTED/issues"
+  },
+  "homepage": "https://github.com/Vulgarity2Elegance/INFECTED#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "sequelize": "^6.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0"
+  }
+}
