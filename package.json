@@ -4,9 +4,10 @@
   "description": "A COVID game app where a user will be prompted to select a city from a dropdown.",
   "main": "server.js",
   "scripts": {
+    "test": "npm run lint",
     "start": "node server.js",
-    "lint": "eslint **/*.js --quiet",
-    "test": "npm run lint"
+    "lint": "eslint --quiet .",
+    "fix": "eslint --fix ."
   },
   "repository": {
     "type": "git",
