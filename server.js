@@ -1,25 +1,34 @@
-var numOne = parseInt(prompt("Give me a number!"));
-var numTwo = parseInt(prompt("Give me another number!"));
-var result;
+// Require necessary npm packages
+const express = require("express");
 
-var operation = prompt(
-  "What would you like to do? (add, subtract, multiply, divide)"
-).toUpperCase();
+// Setting up port and requiring models for syncing
+const PORT = process.env.PORT || 8080;
+const db = require("./models");
 
-if (operation === "ADD") {
-  result = numOne + numTwo;
-  alert("The sum of " + numOne + " and " + numTwo + " is " + result);
-} else if (operation === "SUBTRACT") {
-  result = numOne - numTwo;
-  alert(
-    "The difference between " + numOne + " and " + numTwo + " is " + result
-  );
-} else if (operation === "MULTIPLY") {
-  result = numOne * numTwo;
-  alert("The product of " + numOne + " and " + numTwo + " is " + result);
-} else if (operation === "DIVIDE") {
-  result = numOne / numTwo;
-  alert("The quotient of " + numOne + " and " + numTwo + " is " + result);
-} else {
-  alert("Not a valid option!");
-}
+// Creating express app and configuring middleware needed for authentication
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static(__dirname + "/public"));
+
+// Set Handlebars.
+const exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Requiring our routes
+require("./routes/html-routes.js")(app);
+
+// Syncing our database and logging a message to the user upon success
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      PORT,
+      PORT
+    );
+  });
+});
