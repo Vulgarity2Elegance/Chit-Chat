@@ -18,8 +18,10 @@ $(document).ready(() => {
       .catch(handleLoginErr);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleLoginErr = (err) => {
-    $("#alert .msg").text(JSON.stringify(err.responseJSON));
+    // $("#alert .msg").text(JSON.stringify(err.responseJSON));
+    $("#alert .msg").text("This email address has already registered.");
     $("#alert").fadeIn(500);
   };
 
