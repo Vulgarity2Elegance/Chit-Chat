@@ -2,7 +2,7 @@
 
 ![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)
 
-![gif](./assets/quarantineChef.gif)
+![gif](./public/img/quarantineChef.gif)
 
 ## Description:
 
