@@ -1,0 +1,19 @@
+.btn-orange {
+    background-color: #FFBD59;
+    border-color: #ff5757;
+    border-width: 0.5px;
+}
+
+.btn-orange:hover {
+background-color: #ff5757;
+}
+
+.navbar-quarantineChef {
+background-color: #FFBD59;
+}
+
+
+.logo {
+    max-width: 150px;
+    max-height: fit-content;
+}
