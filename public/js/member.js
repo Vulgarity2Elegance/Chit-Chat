@@ -16,6 +16,29 @@ $(document).ready(() => {
   }
 });
 
+$(".recipe-card").on("click", ".instruction", function () {
+  const id = $(this).data("id");
+  $.ajax({
+    url:
+      "https://api.spoonacular.com/recipes/" +
+      id +
+      "/analyzedInstructions?&apiKey=27eccb2b8d6b4c8d99d5512e94ae0884",
+    method: "GET",
+  }).then((response) => {
+    console.log(response[0].steps);
+    const data = response[0].steps;
+    const templates = [];
+    data.forEach((item) => {
+      templates.push(`
+      <ul class="list-group">
+        <li class="list-group-item">${item.number}.${item.step}</li>
+      </ul>
+      `);
+    });
+    $(".modal-body").html(templates);
+  });
+});
+
 $("#button1").on("click", (e) => {
   e.preventDefault();
   $.ajax({
@@ -39,7 +62,7 @@ $("#button1").on("click", (e) => {
             <p class="card-text">
               ${item.id}
             </p>
-            <a href="#" class="btn btn-primary">View Instructions!</a>
+            <button class="instruction btn btn-primary" data-id="${item.id}" data-toggle="modal" data-target="#exampleModalCenter">View Instructions!</button>
           </div>
         </div>
       </div>
