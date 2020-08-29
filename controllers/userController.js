@@ -77,4 +77,16 @@ router.get("/api/user_data", (req, res) => {
   }
 });
 
+// Route for inserting ingredient to Ingredients table with specific user
+router.post("/api/ingredients", (req, res) => {
+  console.log(req.body);
+  db.Ingredient.create(req.body).then((dbIngredient) => res.json(dbIngredient));
+});
+
+// Route for inserting recipeID, title to Recipe table with specific user
+router.post("/api/recipes", (req, res) => {
+  console.log(req.body);
+  db.Recipe.create(req.body).then((dbRecipe) => res.json(dbRecipe));
+});
+
 module.exports = router;
