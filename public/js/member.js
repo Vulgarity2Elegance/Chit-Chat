@@ -3,6 +3,7 @@ $(document).ready(() => {
   // and updates the HTML on the page
   $.get("/api/user_data").then((data) => {
     $(".member-name").text(data.email);
+    $(".member-id").val(data.id);
   });
 
   $("#searchButton").on("click", (e) => {
@@ -10,7 +11,7 @@ $(document).ready(() => {
     searchedIngredients();
   });
 
-  $(".searchedIngredients").on("click", ".ingredient", function () {
+  $(".searchedIngredients").on("click", ".recipe", function () {
     // Search related recipe for searched ingredient.
     const query = $(this).data("name");
     $.ajax({
@@ -33,14 +34,34 @@ $(document).ready(() => {
             <p class="card-text">
               ${item.id}
             </p>
-            <button class="instruction btn btn-primary btn-sm" data-id="${item.id}" data-toggle="modal" data-target="#exampleModalCenter">View Instructions!</button>
-            <button class="recipeID btn btn-success btn-sm ml-3">Save Recipe!</button>
+            <button class="instruction btn btn-primary btn-sm" data-id="${item.id}" data-toggle="modal" data-target="#recipeCard">View Instructions!</button>
+            <button class="recipeID btn btn-success btn-sm ml-3" data-id="${item.id}" data-title="${item.title}" data-toggle="modal" data-target="#recipeCard">Save Recipe!</button>
           </div>
         </div>
       </div>
     `);
       });
       $(".recipe-card").html(templates);
+    });
+  });
+
+  $(".searchedIngredients").on("click", ".ingredient", function () {
+    const name = $(this).data("name");
+    const userId = $(".member-id").val();
+    $.post("/api/ingredients", {
+      name: name,
+      UserId: userId,
+    }).then(() => {
+      const templates = [];
+      templates.push(`
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      ${name} has successfully saved!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span arira-hidden="true">&times;</span>
+      </button>
+    </div>
+    `);
+      $(".insertedIngredients").html(templates);
     });
   });
 
@@ -52,8 +73,8 @@ $(document).ready(() => {
   <div class="card text-white bg-warning mb-3">
     <div class="card-body">
       <h5 class="card-title text-center">${searchedIngredients}</h5>
-      <button class="ingredient btn btn-primary btn-sm" data-name="${searchedIngredients}">Search Recipes!</button>
-      <button class="btn btn-success btn-sm">Save Ingredient!</button>
+      <button class="recipe btn btn-primary btn-sm" data-name="${searchedIngredients}">Search Recipes!</button>
+      <button class="ingredient btn btn-success btn-sm" data-name="${searchedIngredients}">Save Ingredient!</button>
     </div>
   </div>
   `);
@@ -80,6 +101,23 @@ $(document).ready(() => {
       </ul>
       `);
       });
+      $(".modal-body").html(templates);
+    });
+  });
+
+  $(".recipe-card").on("click", ".recipeID", function () {
+    const id = $(this).data("id");
+    const title = $(this).data("title");
+    const userId = $(".member-id").val();
+    $.post("/api/recipes", {
+      recipeId: id,
+      title: title,
+      UserId: userId,
+    }).then(() => {
+      const templates = [];
+      templates.push(`
+      <div class="alert alert-success" role="alert">${title} has successfully saved!</div>
+    `);
       $(".modal-body").html(templates);
     });
   });
