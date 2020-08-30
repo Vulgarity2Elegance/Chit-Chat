@@ -1,3 +1,11 @@
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
 .btn-orange {
     background-color: #FFBD59;
     border-color: #ff5757;
@@ -14,6 +22,24 @@ background-color: #FFBD59;
 
 
 .logo {
-    max-width: 150px;
+    max-width: 100px;
     max-height: fit-content;
+}
+
+body {
+    background-image: url("../img/HomePage.jpeg");
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.backgroundHome {
+    background-color: white;
+    opacity: 75%;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 200;
+    
 }
