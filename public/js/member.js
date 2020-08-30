@@ -139,6 +139,8 @@ $(document).ready(() => {
   renderIngredients();
   $(".searchedIngredients").on("click", ".saved", function () {
     const query = $(this).data("name");
+    console.log(query);
+    $("#ingreName").html(query);
     $.ajax({
       url:
         "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" +
