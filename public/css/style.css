@@ -9,7 +9,6 @@ html {
 .btn {
     background-color: #FFBD59;
     border-color: #ff5757;
-    border-width: 0.5px;
 }
 
 .btn:hover {
@@ -18,7 +17,6 @@ background-color: #ff5757;
 
 .navbar-quarantineChef {
 background-color: #FFBD59;
-max-height: 5%;
 }
 
 

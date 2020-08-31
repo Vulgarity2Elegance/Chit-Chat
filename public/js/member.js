@@ -4,12 +4,10 @@ $(document).ready(() => {
     $(".member-name").text(data.email);
     $(".member-id").val(data.id);
   });
-
   $("#searchButton").on("click", (e) => {
     e.preventDefault();
     searchedIngredients();
   });
-
   $(".searchedIngredients").on("click", ".recipe", function () {
     // Search related recipe for searched ingredient.
     const query = { search: $(this).data("name") };
@@ -18,7 +16,6 @@ $(document).ready(() => {
       renderRecipeCards(data);
     });
   });
-
   function renderRecipeCards(data) {
     const templates = [];
     data.forEach((item) => {
@@ -40,7 +37,6 @@ $(document).ready(() => {
     });
     $(".recipe-card").html(templates);
   }
-
   $(".searchedIngredients").on("click", ".ingredient", function () {
     const name = $(this).data("name");
     const userId = $(".member-id").val();
@@ -60,7 +56,6 @@ $(document).ready(() => {
       $(".insertedIngredients").html(templates);
     });
   });
-
   function searchedIngredients() {
     // Rendering a card for an ingredient in order to search recipe or save the ingredient.
     const searchedIngredients = $("#ingredients").val();
@@ -76,7 +71,6 @@ $(document).ready(() => {
   `);
     $(".searchedIngredients").html(templates);
   }
-
   $(".recipe-card").on("click", ".instruction", function () {
     // Redering instructions for the selected recipe
     const query = { search: $(this).data("id") };
@@ -85,7 +79,6 @@ $(document).ready(() => {
       renderInstructionSteps(response);
     });
   });
-
   function renderInstructionSteps(response) {
     console.log(response[0].steps);
     const data = response[0].steps;
@@ -99,7 +92,6 @@ $(document).ready(() => {
     });
     $(".modal-body").html(templates);
   }
-
   $(".recipe-card").on("click", ".recipeID", function () {
     const id = $(this).data("id");
     const title = $(this).data("title");
@@ -116,7 +108,6 @@ $(document).ready(() => {
       $(".modal-body").html(templates);
     });
   });
-
   function renderIngredients() {
     $.get("/api/ingredients").then((data) => {
       console.log(data);
@@ -140,7 +131,6 @@ $(document).ready(() => {
       renderRecipeCards(data);
     });
   });
-
   function renderRecipes() {
     $.get("/api/recipes").then((data) => {
       console.log(data);
@@ -163,4 +153,4 @@ $(document).ready(() => {
       renderInstructionSteps(response);
     });
   });
-});
+})
