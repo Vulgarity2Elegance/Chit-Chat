@@ -43,6 +43,7 @@ body {
     justify-content: space-between;
 }
 .backgroundHome {
+    margin-top :15%;
     background-color: white;
     opacity: 75%;
     vertical-align: middle;
