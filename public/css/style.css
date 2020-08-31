@@ -50,3 +50,7 @@ body {
     justify-content: center;
     margin-top : 3%;
 }
+
+.card-body {
+    background-color: #FFBD59;
+}
