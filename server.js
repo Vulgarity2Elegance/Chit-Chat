@@ -1,5 +1,5 @@
 // Require necessary npm packages
-require("dotenv").config({ silent: true });
+require("dotenv").config({ silent: process.env.NODE_ENV === "production" });
 const express = require("express");
 const session = require("express-session");
 // Requiring passport as we've configured it
