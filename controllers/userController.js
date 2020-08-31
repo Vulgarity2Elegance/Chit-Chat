@@ -89,4 +89,37 @@ router.post("/api/recipes", (req, res) => {
   db.Recipe.create(req.body).then((dbRecipe) => res.json(dbRecipe));
 });
 
+// Here we've add our isAuthenticated middleware to this route.
+// If a user who is not logged in tries to access this route they will be redirected to the signup page
+router.get("/account", isAuthenticated, (req, res) => {
+  res.render("account");
+});
+
+// GET route for getting all of the Ingredients
+router.get("/api/ingredients", async (req, res) => {
+  // Here we add an "include" property to our options in our findAll query
+  // We set the value to an array of the models we want to include in a left outer join
+  // In this case, just db.User
+  const ingredients = await db.Ingredient.findAll({
+    where: {
+      UserId: req.user.id,
+    },
+    include: [{ model: db.User, attributes: ["id", "email"] }],
+  });
+  res.json(ingredients);
+});
+
+// GET route for getting all of the recipes
+router.get("/api/recipes", async (req, res) => {
+  // Here we add an "include" property to our options in our findAll query
+  // We set the value to an array of the models we want to include in a left outer join
+  // In this case, just db.User
+  const recipes = await db.Recipe.findAll({
+    where: {
+      UserId: req.user.id,
+    },
+    include: [{ model: db.User, attributes: ["id", "email"] }],
+  });
+  res.json(recipes);
+});
 module.exports = router;
