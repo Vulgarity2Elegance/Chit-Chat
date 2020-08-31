@@ -43,3 +43,9 @@ body {
     font-weight: 200;
     
 }
+
+.ingreLists{
+    display:flex;
+    justify-content: center;
+    margin-top : 3%;
+}

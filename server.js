@@ -1,5 +1,7 @@
 // Require necessary npm packages
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 const express = require("express");
 const session = require("express-session");
 // Requiring passport as we've configured it
@@ -31,10 +33,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Requiring our routes
-const routes = require("./controllers/userController");
-app.use(routes);
-// require("./routes/html-routes.js")(app);
-// require("./routes/api-routes.js")(app);
+const userRoutes = require("./controllers/userController");
+app.use(userRoutes);
+
+const apiRoutes = require("./controllers/apiController");
+app.use(apiRoutes);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
