@@ -153,4 +153,4 @@ $(document).ready(() => {
       renderInstructionSteps(response);
     });
   });
-})
+});
