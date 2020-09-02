@@ -11,6 +11,8 @@ A handy application which can show you how to turn any boring ingredients into i
 
 Deployed application is on Heroku: [QuarantineChef](https://quarantine-chef-41313.herokuapp.com/)
 
+NB: Not every recipe contains analyzedInstructions array. You may run into an error because of that, which is not a bug of this app.
+
 ## Table of Contents
 
 - [Installation](#Installation)
